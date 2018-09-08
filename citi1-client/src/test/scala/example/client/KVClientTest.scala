@@ -8,7 +8,7 @@ import org.scalatest.{FunSuite, Matchers}
 import scala.concurrent.duration.DurationDouble
 import scala.concurrent.{Await, Future}
 
-class KVClientTest extends FunSuite with Matchers with PlayJsonSupport with Domain {
+class KVClientTest extends FunSuite with Matchers with PlayJsonSupport with DomainFormats {
 
   test("set-get") {
     implicit val actorSystem: ActorSystem = ActorSystem("test")

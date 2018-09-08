@@ -5,7 +5,7 @@ case class Id(value: String)
 
 case class Person(name: String, age: Int)
 
-trait Domain {
+trait DomainFormats {
   implicit val idFormat: Format[Id]         = Json.format[Id]
   implicit val personFormat: Format[Person] = Json.format[Person]
 }
