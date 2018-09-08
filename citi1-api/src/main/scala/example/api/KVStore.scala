@@ -1,4 +1,4 @@
-package example
+package example.api
 import scala.concurrent.Future
 
 trait KVStore[K, V] {

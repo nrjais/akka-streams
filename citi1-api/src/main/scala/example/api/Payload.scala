@@ -1,4 +1,5 @@
-package example
+package example.api
+
 import play.api.libs.json.{Format, Json}
 
 case class Payload[K, V](key: K, value: V)

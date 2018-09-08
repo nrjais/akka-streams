@@ -1,4 +1,4 @@
-package example
+package example.client
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
@@ -7,6 +7,7 @@ import akka.http.scaladsl.model.{HttpMethods, HttpRequest, RequestEntity, Status
 import akka.http.scaladsl.unmarshalling.Unmarshal
 import akka.stream.ActorMaterializer
 import de.heikoseeberger.akkahttpplayjson.PlayJsonSupport
+import example.api.{KVStore, Payload}
 import play.api.libs.json.Format
 
 import scala.async.Async._
