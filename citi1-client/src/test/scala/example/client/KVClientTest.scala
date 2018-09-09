@@ -27,12 +27,13 @@ class KVClientTest extends FunSuite with Matchers with PlayJsonSupport with Doma
     implicit val mat: ActorMaterializer   = ActorMaterializer()
     val client: KVStore[Id, Person]       = new KVClient[Id, Person]("http://localhost:8080")
 
-    val id     = Id("1")
-    val person = Person("Neeraj", 21)
+    val id = Id("1")
+    client.watch(id).map(_.runForeach(x => println(s"1: $x")))
 
-    client.watch(id).runForeach(println)
+    client.set(id, Person("Neeraj", 21))
 
-    client.set(id, person)
+    client.watch(id).map(_.runForeach(x => println(s"2: $x")))
+
     client.set(id, Person("N", 20))
     client.set(id, Person("J", 25))
 

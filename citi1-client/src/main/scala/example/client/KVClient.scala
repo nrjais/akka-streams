@@ -49,7 +49,7 @@ class KVClient[K: Format, V: Format](baseUri: String)(implicit ac: ActorSystem) 
     }
   }
 
-  override def watch(key: K): Source[KeyWatchUpdate[K, V], KillSwitch] = {
+  override def watch(key: K): Option[Source[KeyWatchUpdate[K, V], KillSwitch]] = {
     val dd = async {
       val request = HttpRequest()
         .withMethod(HttpMethods.POST)
@@ -64,6 +64,8 @@ class KVClient[K: Format, V: Format](baseUri: String)(implicit ac: ActorSystem) 
       ).map(x => Json.parse(x.data).as[KeyWatchUpdate[K, V]])
     }
 
-    Source.fromFutureSource(dd).viaMat(KillSwitches.single)(Keep.right)
+    Option(dd)
+      .map(Source.fromFutureSource)
+      .map(_.viaMat(KillSwitches.single)(Keep.right))
   }
 }

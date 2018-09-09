@@ -19,7 +19,7 @@ class KVRoutes(kvStore: KVStore[JsValue, JsValue]) extends Directives with PlayJ
     path("watch") {
       entity(as[JsValue]) { key =>
         rejectEmptyResponse {
-          complete(kvStore.watch(key).map(x => Json.toJson(x).toString()).map(x => ServerSentEvent(x)))
+          complete(kvStore.watch(key).map(_.map(x => Json.toJson(x).toString()).map(x => ServerSentEvent(x))))
         }
       }
     } ~
