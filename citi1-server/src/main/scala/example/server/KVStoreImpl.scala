@@ -8,7 +8,9 @@ import example.api.{KVStore, KeyWatchUpdate}
 import scala.concurrent.{ExecutionContext, Future}
 
 class KVStoreImpl[K, V](implicit val mat: Materializer) extends KVStore[K, V] {
+
   private[this] var data: Map[K, V] = Map.empty
+
   implicit val ec: ExecutionContext = ExecutionContext
     .fromExecutorService(Executors.newSingleThreadExecutor())
 

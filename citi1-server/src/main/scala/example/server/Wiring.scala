@@ -8,6 +8,6 @@ class Wiring {
   implicit val actorSystem: ActorSystem       = ActorSystem("test")
   implicit val mat: Materializer              = ActorMaterializer()
   lazy val kvStore: KVStore[JsValue, JsValue] = new KVStoreImpl[JsValue, JsValue]
-  lazy val routes                             = new KVRoutes(kvStore)
-  lazy val server                             = new KVServer(routes)
+  lazy val routes: KVRoutes                   = new KVRoutes(kvStore)
+  lazy val server: KVServer                   = new KVServer(routes)
 }
